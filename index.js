@@ -25,8 +25,8 @@
 
     var timer;
     addEventListener("scroll", function() {
+      timer && clearTimeout(timer);
       timer = setTimeout(function() {
-        timer && clearTimeout(timer);
         self._detectElementIfInScreen();
       }, 50);
     });
@@ -108,7 +108,7 @@
       case typeof module === 'object' && !!module.exports:
         module.exports = component;
         break;
-      case String(typeof define) === 'function' && !!define.amd:
+      case typeof define === 'function' && !!define.amd:
         define(name, function() {
           return component;
         });
