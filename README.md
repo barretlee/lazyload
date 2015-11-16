@@ -33,3 +33,7 @@ There are two param your can set:
 <img src data-src="THE-REAL-PATH" />
 ```
 - `Lazyload.DISTANCE`, default is 0, if you want to show the lazyload element in advance, you can set it to a positive number;
+
+### Liscese
+
+Under MIT Liscese. Copyright (c) 2015 小胡子哥(Barret Lee)
