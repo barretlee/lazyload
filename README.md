@@ -1,6 +1,6 @@
 ## Lazyload
 
-A mini lazyload component within 100 lines code.
+A mini lazyload component within 100 lines code, support amd/cmd require.
 
 Live demo: <http://barretlee.github.io/lazyload/demo/index.html>
 

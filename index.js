@@ -1,3 +1,9 @@
+/**
+ * MIT License
+ * @author Barret Lee<http://barretlee.com/about/>
+ * @datetime 2015-11-16 20:21:27
+ */
+
 ~function(window, undefined) {
 
   // exports to global
