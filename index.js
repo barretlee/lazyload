@@ -31,6 +31,7 @@
       }, 50);
     });
     addEventListener("resize", function(){
+      timer && clearTimeout(timer);
       self._detectElementIfInScreen();
     });
   };
@@ -38,7 +39,7 @@
   // detect if in screen
   Lazyload.prototype._detectElementIfInScreen = function() {
     if(!this.elements.length) return;
-    for (var i = 0; i < this.elements.length; i++) {
+    for (var i = 0, len = this.elements.length; i < len; i++) {
       var ele = this.elements[i];
       var rect = ele.getBoundingClientRect();
       if(rect.top >= Lazyload.DISTANCE && rect.left >= Lazyload.DISTANCE
@@ -46,7 +47,7 @@
         && rect.left <= (window.innerWidth || document.documentElement.clientWidth)) {
         this.loadItem(ele, i);
         this.elements.splice(i, 1);
-        i--;
+        i--; len--;
       }
     }
   };
@@ -54,7 +55,7 @@
   // lazyload img or script
   Lazyload.prototype.loadItem = function(ele, i) {
     var imgs = ele.getElementsByTagName("img");
-    for(var i = 0; i < imgs.length; i++) {
+    for(var i = 0, len = imgs.length; i < len; i++) {
       var img = imgs[i];
       var src = img.getAttribute(Lazyload.TAG);
       if(src) {
@@ -63,7 +64,7 @@
     }
 
     var textareas = ele.getElementsByTagName("textarea");
-    for(var j = 0; j < textareas.length; j++){
+    for(var j = 0, len = textareas.length; j < len; j++){
       var script = textareas[j].value;
       if(window.execScript) {
         window.execScript(script);
@@ -89,7 +90,7 @@
     }
     if(res.item) { /* Fuck IE8 */
       var ret = [];
-      for(var i = 0; i < res.length; i++){
+      for(var i = 0, len = res.length; i < len; i++){
         ret.push(res.item(i));
       }
       res = ret;
