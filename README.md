@@ -2,6 +2,8 @@
 
 A mini lazyload component within 100 lines code, support amd/cmd require.
 
+Chinese - 文章导读：<http://www.barretlee.com/blog/2015/11/16/lazyload-component/>
+
 Live demo: <http://barretlee.github.io/lazyload/demo/index.html>
 
 ### Usage
