@@ -42,7 +42,9 @@
     for (var i = 0, len = this.elements.length; i < len; i++) {
       var ele = this.elements[i];
       var rect = ele.getBoundingClientRect();
-      if(rect.top >= Lazyload.DISTANCE && rect.left >= Lazyload.DISTANCE
+      if((rect.top >= Lazyload.DISTANCE && rect.left >= Lazyload.DISTANCE
+         || rect.top < 0 && (rect.top + rect.height) >= Lazyload.DISTANCE
+         || rect.left < 0 && (rect.left + rect.width >= Lazyload.DISTANCE))
         && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
         && rect.left <= (window.innerWidth || document.documentElement.clientWidth)) {
         this.loadItem(ele, i);
