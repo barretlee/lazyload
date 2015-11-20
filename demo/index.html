@@ -51,21 +51,21 @@
   <div class="item"><img src="http://g.alicdn.com/s.gif" data-src="https://aecpm.alicdn.com/simba/img/TB1lewOKXXXXXb7XVXXSutbFXXX.jpg_300x300.jpg" alt="taobao"></div>
   <div class="item">
     <textarea>
-      console.log(4);
+      log(4);
     </textarea>
   </div>
   <div class="item"><img src="http://g.alicdn.com/s.gif" data-src="https://aecpm.alicdn.com/simba/img/TB1y.bIKpXXXXXeaXXXSutbFXXX.jpg_300x300.jpg" alt="taobao"></div>
   <div class="item"><img src="http://g.alicdn.com/s.gif" data-src="https://img.alicdn.com/tps/TB1Xx_PKpXXXXcbXVXXXXXXXXXX-520-280.jpg_300x300.jpg" alt="taobao"></div>
   <div class="item">
     <textarea>
-      console.log(7);
+      log(7);
     </textarea>
   </div>
   <div class="item"><img src="http://g.alicdn.com/s.gif" data-src="https://img.alicdn.com/tps/TB1rPrIKpXXXXbzaXXXXXXXXXXX-520-280.jpg_300x300.jpg" alt="taobao"></div>
   <div class="item"><img src="http://g.alicdn.com/s.gif" data-src="https://img.alicdn.com/tps/i1/TB15uKyKpXXXXaraXXXmxYvZVXX-320-180.jpg_300x300.jpg" alt="taobao"></div>
   <div class="item">
     <textarea>
-      console.log(10);
+      log(10);
     </textarea>
   </div>
   <div class="item"><img src="http://g.alicdn.com/s.gif" data-src="https://img.alicdn.com/tps/TB1MZjjKpXXXXcaXVXXXXXXXXXX-320-180.png_300x300.jpg" alt="taobao"></div>
@@ -77,10 +77,10 @@
   function log(msg) {
     window.console && window.console.log && window.console.log(msg);
   }
-  console.log("Pause, restart after 1.5 seconds.")
+  log("Pause, restart after 1.5 seconds.")
   var lazyload = new Lazyload(".item", {
     callback: function(){
-      console.log("All lazyload item finished.");
+      log("All lazyload item finished.");
     }
   }).pause();
 
