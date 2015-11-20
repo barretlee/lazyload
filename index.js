@@ -47,7 +47,7 @@
          || rect.left < 0 && (rect.left + rect.width >= Lazyload.DISTANCE))
         && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
         && rect.left <= (window.innerWidth || document.documentElement.clientWidth)) {
-        this.loadItem(ele, i);
+        this.loadItem(ele);
         this.elements.splice(i, 1);
         i--; len--;
       }
@@ -55,7 +55,7 @@
   };
 
   // lazyload img or script
-  Lazyload.prototype.loadItem = function(ele, i) {
+  Lazyload.prototype.loadItem = function(ele) {
     var imgs = ele.getElementsByTagName("img");
     for(var i = 0, len = imgs.length; i < len; i++) {
       var img = imgs[i];
