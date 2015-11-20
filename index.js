@@ -56,14 +56,16 @@
 
     if(!this.elements.length) return;
 
+    var W = window.innerWidth || document.documentElement.clientWidth;
+    var H = window.innerHeight || document.documentElement.clientHeight;
+
     for (var i = 0, len = this.elements.length; i < len; i++) {
       var ele = this.elements[i];
       var rect = ele.getBoundingClientRect();
       if(!this._pause && (rect.top >= this.distance && rect.left >= this.distance
           || rect.top < 0 && (rect.top + rect.height) >= this.distance
           || rect.left < 0 && (rect.left + rect.width >= this.distance))
-         && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
-         && rect.left <= (window.innerWidth || document.documentElement.clientWidth)) {
+         && rect.top <= H && rect.left <= W ){
         this.loadItem(ele);
         this.elements.splice(i, 1);
         i--; len--;
