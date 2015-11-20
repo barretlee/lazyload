@@ -9,13 +9,28 @@
   // exports to global
   umd("Lazyload", Lazyload);
 
-  Lazyload.TAG = "data-src";
-  Lazyload.DISTANCE = 0;
+  Lazyload.SENCER = 30;
+  var noop = function() {};
 
   // Lazyload Component
-  function Lazyload(elements) {
+  function Lazyload(elements, opts) {
+    var self = this;
+
+    this.tag = "data-src";
+    this.distance = 0;
+    this.callback = noop;
+    this._pause = false;
+
+    // mixin
+    var opts = opts || {};
+    for(var key in opts) {
+      this[key] = opts[key];
+    }
+
     this.elements = typeof elements === "string" ? $(elements) : elements;
-    this.init();
+    setTimeout(function(){
+      self.init();
+    }, 4);
   };
 
   // init, bind event
@@ -28,7 +43,7 @@
       timer && clearTimeout(timer);
       timer = setTimeout(function() {
         self._detectElementIfInScreen();
-      }, 50);
+      }, Lazyload.SENCER);
     });
     addEventListener("resize", function(){
       timer && clearTimeout(timer);
@@ -38,26 +53,45 @@
 
   // detect if in screen
   Lazyload.prototype._detectElementIfInScreen = function() {
+
     if(!this.elements.length) return;
+
     for (var i = 0, len = this.elements.length; i < len; i++) {
       var ele = this.elements[i];
       var rect = ele.getBoundingClientRect();
-      if(rect.top >= Lazyload.DISTANCE && rect.left >= Lazyload.DISTANCE
-        && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
-        && rect.left <= (window.innerWidth || document.documentElement.clientWidth)) {
-        this.loadItem(ele, i);
+      if(!this._pause && (rect.top >= this.distance && rect.left >= this.distance
+          || rect.top < 0 && (rect.top + rect.height) >= this.distance
+          || rect.left < 0 && (rect.left + rect.width >= this.distance))
+         && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+         && rect.left <= (window.innerWidth || document.documentElement.clientWidth)) {
+        this.loadItem(ele);
         this.elements.splice(i, 1);
         i--; len--;
       }
     }
+
+    if(!this.elements.length) {
+      this.callback && this.callback();
+    }
+  };
+
+  Lazyload.prototype.pause = function() {
+    this._pause = true;
+    return this;
+  };
+
+  Lazyload.prototype.restart = function() {
+    this._pause = false;
+    this._detectElementIfInScreen();
+    return this;
   };
 
   // lazyload img or script
-  Lazyload.prototype.loadItem = function(ele, i) {
+  Lazyload.prototype.loadItem = function(ele) {
     var imgs = ele.getElementsByTagName("img");
     for(var i = 0, len = imgs.length; i < len; i++) {
       var img = imgs[i];
-      var src = img.getAttribute(Lazyload.TAG);
+      var src = img.getAttribute(this.tag);
       if(src) {
         img.setAttribute("src", src);
       }
